@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<!--
+Copyright: Daemon Pty Limited 2006, http://www.daemon.com.au
+Community: Mollio http://www.mollio.org $
+License: Released Under the "Common Public License 1.0", 
+http://www.opensource.org/licenses/cpl.php
+License: Released Under the "Creative Commons License", 
+http://creativecommons.org/licenses/by/2.5/
+License: Released Under the "GNU Creative Commons License", 
+http://creativecommons.org/licenses/GPL/2.0/
+-->
+<!--
+Modified for Xoops by Kevin van Haaren (kevin@vanhaaren.net)
+Modified on June 2, 2006
+Modifications released under same licenses as original
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<{$xoops_charset}>" />
+<meta http-equiv="content-language" content="<{$xoops_langcode}>" />
+<meta name="robots" content="<{$xoops_meta_robots}>" />
+<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+<meta name="description" content="<{$xoops_meta_description}>" />
+<meta name="rating" content="<{$xoops_meta_rating}>" />
+<meta name="author" content="<{$xoops_meta_author}>" />
+<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+<meta name="generator" content="XOOPS" />
+<title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
+<link href="<{$xoops_url}>/themes/<{$xoops_theme}>/images/favicon.ico" rel="SHORTCUT ICON" />
+<!-- xoops default stylesheet -->
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/xoops.css" />
+<!-- theme css -->
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/themes/<{$xoops_theme}>/css/main.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/themes/<{$xoops_theme}>/css/print.css" media="print" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="<{$xoops_url}>/themes/<{$xoops_theme}>/css/ie6_or_less.css" />
+<![endif]-->
+
+<!-- header info from current module -->
+<{$xoops_module_header}>
+<!-- xoops javascript -->
+<script type="text/javascript">
+<!--
+<{$xoops_js}>
+//-->
+</script>
+
+<!-- theme javascript -->
+<script type="text/javascript" src="<{$xoops_url}>/themes/<{$xoops_theme}>/jscript/common.js"></script>
+
+</head>
+<body id="type-b">
+<div id="wrap">
+
+	<div id="header">
+		<div id="site-name"><a href="/"><{$xoops_sitename}></a></div>
+		<!-- Search block -->
+		<{foreach item=block from=$xoops_rblocks}>
+			<{if $block.weight == 1}>
+				<div id="search"><{$block.content}></div>
+			<{/if}>
+		<{/foreach}>
+
+		<!-- menu bar -->
+		<ul id="nav">
+		<!-- User Menu or Login -->
+		<{if $xoops_isuser}>
+			<{foreach item=block from=$xoops_rblocks}>
+				<{if $block.weight == 2}>
+					<li class="first"><a href="<{$xoops_url}>/user.php"><{$block.title}></a>
+					<{$block.content}>
+					</li>
+				<{/if}>
+			<{/foreach}>
+		<{else}>
+			<li class="first"><a href="<{$xoops_url}>/user.php"><{$smarty.const._LOGIN}></a></li>
+		<{/if}>
+		<{foreach item=block from=$xoops_rblocks}>
+			<{if $block.weight == 3}>
+				<{$block.content}>
+			<{/if}>
+		<{/foreach}>
+		</ul>
+	</div>
+	
+	<div id="content-wrap">
+		<div id="utility">
+			<!-- Start left blocks loop -->
+			<{foreach item=block from=$xoops_lblocks}>
+				<{include file="$xoops_theme/blocks/theme_blockleft.html"}>
+			<{/foreach}>
+			<!-- End left blocks loop -->
+		</div>
+		<div id="content">
+			<{if $xoops_showcblock == 1}>
+				<!-- begin center-center blocks -->
+				<{foreach item=block from=$xoops_ccblocks}>
+					<{include file="$xoops_theme/blocks/theme_blockcenter_c.html"}>
+				<{/foreach}>
+				<!-- end center-center blocks -->
+			<{/if}>
+			<{$xoops_contents}>
+			<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+				<{if $xoBlocks.page_bottomcenter}>
+					<{foreach from=$xoBlocks.page_bottomcenter item=block}>
+						<{include file="$xoops_theme/blocks/theme_blockcenter_c.html"}>
+					<{/foreach}>
+				<{/if}>
+				<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright}>
+					<{foreach from=$xoBlocks.page_bottomleft item=block}>
+						<{include file="$xoops_theme/blocks/theme_blockcenter_l.html"}>
+					<{/foreach}>
+					<{foreach from=$xoBlocks.page_bottomright item=block}>
+						<{include file="$xoops_theme/blocks/theme_blockcenter_r.html"}>
+					<{/foreach}>
+				<{/if}>
+			<{/if}>
+
+			<div id="footer">
+			<p>Software by: <a href="http://www.xoops.org" target="_blank">Xoops</a>, Theme: <a href="http://www.mollio.org/" target="_blank">Mollio Type B</a> (modified for Xoops by <a href="http://www.superfantasmoworld.com/" target="_blank">Kevin van Haaren</a>)</p>
+			<p><{$xoops_footer}></p>
+			</div>
+		</div>
+		
+<!--		<div id="poweredby"><a href="http://farcry.daemon.com.au/"><img src="wsimages/mollio.gif" alt="FarCry - Mollio" /></a></div>
+-->		
+	</div>
+</div>
+</body>
+</html>

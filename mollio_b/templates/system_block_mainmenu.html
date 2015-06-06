@@ -1,0 +1,36 @@
+<{* loop through all module menu items *}>
+<{foreach name=mainmenu item=module from=$block.modules}>
+	<{if $smarty.foreach.mainmenu.last}>
+		<{if $xoops_dirname == $module.directory}>
+			<li class="active"><a href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
+		<{else}>
+			<li class="last"><a href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
+		<{/if}>
+	<{else}>
+		<{if $xoops_dirname == $module.directory}>
+			<li class="active"><a href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
+		<{else}>
+			<li><a href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
+		<{/if}>
+	<{/if}>
+
+	<{* build sub-menu for each module *}>
+	<{foreach name=submenu item=sublink from=$module.sublinks}>
+		<{* if there is one submenu, it is possible for .first and .last to be
+		    true at the same time *}>
+		<{if $smarty.foreach.submenu.first}>
+			<ul>
+		<{/if}>
+
+		<{if $smarty.foreach.submenu.last}>
+			<li class="last"><a href="<{$sublink.url}>"><{$sublink.name}></a></li>
+			</ul>
+		<{elseif $smarty.foreach.submenu.first}>
+			<li class="first"><a href="<{$sublink.url}>"><{$sublink.name}></a></li>
+		<{else}>
+			<li><a href="<{$sublink.url}>"><{$sublink.name}></a></li>
+		<{/if}>
+	<{/foreach}>
+	<{* close the main menu list item *}>
+	</li>
+<{/foreach}>
